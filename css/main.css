@@ -11,7 +11,8 @@ a {
   background-color: #f3e9f1; }
 
 .jumbotron {
-  margin-top: 20px; }
+  margin-top: 20px;
+  background-color: #f3e9f1; }
 
 .row {
   margin: 0; }
@@ -26,6 +27,16 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
-  background-color: #3eb382 !important; }
+  background-color: #f3e9f1; }
+
+.produit img {
+  min-width: 100%;
+  min-height: 100%; }
+
+.produit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; }
 
 /*# sourceMappingURL=main.css.map */
