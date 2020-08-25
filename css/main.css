@@ -20,6 +20,9 @@ a {
 .container {
   background-color: red; }
 
+.card {
+  width: 18rem; }
+
 body {
   background-color: #F5DEB3; }
 
