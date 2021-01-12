@@ -1,4 +1,3 @@
-
 const main = document.getElementById('produits');
 
 fetch('http://localhost:3000/api/cameras/').then(response => {
@@ -11,17 +10,23 @@ fetch('http://localhost:3000/api/cameras/').then(response => {
   .then(produit => {
     for(const item of produit) {
         let prix = item.price / 100;
+        var urlProduit = 'produits.html'
+        var pageProduit = urlProduit.concat(item._id)
+        console.log(pageProduit)
         console.log(prix)
         let card = 
-        `<div class="card">
-        <img class="card-img-top" src="${item.imageUrl}" alt="${item.name}">
-        <div class="card-body">
-        <h5 class="card-title">${item.name}</h5>
-        <p class="card-description">${item.description}</p>
-        <p class="card-price">${prix.toFixed(2)} €</p>
-        <a href="${item._id}" class="btn btn-primary">Voir Produit</a>
-        </div>
+        `<div class="cam col-xs-12 col-4">
+           <div class="card">
+            <img class="card-img-top" src="${item.imageUrl}" alt="${item.name}">
+            <div class="card-body">
+            <h5 class="card-title">${item.name}</h5>
+            <p class="card-description">${item.description}</p>
+            <p class="card-price">${prix.toFixed(2)} €</p>
+            <a href="produits.html?${item._id}" class="btn btn-primary">Voir Produit</a>
+            </div>
+            </div>
         </div>`;
+                
         produits.innerHTML += card;
 
         console.log(item)

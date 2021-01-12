@@ -17,8 +17,16 @@ a {
 .row {
   margin: 0; }
 
-.container {
-  background-color: red; }
+.cam {
+  align-items: center; }
+
+.card {
+  margin-top: 40px;
+  min-width: 100%;
+  align-items: center; }
+
+.col-6 {
+  align-items: center; }
 
 .card {
   width: 18rem; }
