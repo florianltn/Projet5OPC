@@ -25,7 +25,7 @@ fetch(getUrl)
               <h2 class="card-title h5">${item.name}</h2>
               <p class="card-text">${item.description}</p>
               <label for="lenses">Selectionner la lentille</label>
-              <select id="lenses" value="${item.lenses}" class="form-control form-control-sm"></select>
+              <select id="lenses" class="form-control form-control-sm"></select>
             <div class="d-flex justify-content-between align-items-center mt-3">
               <small id="prix" class="text-muted">${prix.toFixed(2)} €</small>
               
@@ -42,21 +42,35 @@ fetch(getUrl)
       </div>
     </div>`;
 
-    //console.log(item.lenses)
-
+/*
   //ajout des lentilles
-  lenses = item.lenses;
-    lensesOptions = document.getElementById('lenses')
+  var lenses = item.lenses;
+  console.log(item.lenses)
+  
 
-    for (i = 0; i < lenses.length; i++) {
-        lensesOptions += '<select id="lenses">' + lenses[i] + '</select>';
+  let selectionChoix = document.getElementById('lenses');
+  console.log(selectionChoix);
+  for(let lense of item.lenses){
+       let x =`<option value="${lense}">${lense}</option>`;
+  selectionChoix.appendChild(x);
     }
+    */
 
-    lenses.innerHTML += lensesOptions
 
   //detail produit
   const detailproduits = document.getElementById('detailproduits')
   detailproduits.innerHTML += card;
+
+  //ajout des lentilles
+  var lenses = item.lenses;
+  console.log(item.lenses)
+
+  let selectionChoix = document.getElementById('lenses');
+  console.log(selectionChoix);
+  for(let lense of item.lenses){
+      let x =`<option value="${lense}">${lense}</option>`;
+  selectionChoix.innerHTML += x;
+   }
 
   //synchro ajout panier click button
   addPanier.addEventListener('click', e => {
@@ -116,3 +130,4 @@ function decrease(){
   textBox.value--;
   }
 }
+

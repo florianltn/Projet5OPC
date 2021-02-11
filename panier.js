@@ -1,7 +1,5 @@
     for(var i=1; i < localStorage.length + 1; i++){
       let panier = console.log(localStorage.getItem("orinoco" + i));
-      //var lsSize = console.log(localStorage.length)
-      // créer tableau ici et récuperer les valeurs
       
       const infoProduit = JSON.parse(localStorage.getItem("orinoco" +i));
       console.log("Modèle :" + infoProduit.nom);
@@ -58,122 +56,12 @@
       <div class="cart_buttons"> 
         <button type="button" onclick=window.location.href='index.html'; class="button cart_button_clear">Continuer mes achats</button>
       </div>`;
-    }
-      
-      
-      /*`   <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
-      <div class="d-flex flex-row">
-        <img class="rounded" src="${infoProduit.photo}" width="180">
-          <div class="ml-2">
-            <span class="font-weight-bold d-block">${infoProduit.nom}</span>
-            <span class="spec">${infoProduit.description}</span>
-            <span class="lentille">${infoProduit.lenses}</span>
-          </div>
-             <button id="${infoProduit.id}" class="btn btn-danger btn-X" type="button">Supprimer</button>
-      </div>
-      <div class="d-flex flex-row align-items-center">
-        <span class="d-block">${infoProduit.quantité}</span>
-        <span class="d-block ml-5 font-weight-bold">${infoProduit.prix}</span>
-      </div>
-          `; 
-            
-    }
-    /*`<table> 
-     <tr>
-        <th>Modèle</th>
-        <th>Photo</th>
-        <th>Description</th>
-        <th>Lentille</th>
-        <th>Prix</th>
-        <th>Quantité</th>
-      </tr>
-      <tr>
-        <td>${infoProduit.nom}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>`;
-}
-    
-// while ( i <= localStorage.length) {
-        //refaire le meme processus
-        
-      //}  
-    
- /*     document.getElementById('panier').innerHTML =
-          `<div class="cart-product">
-            <div class="cart-item cart-column">
-                <span class="cart-item-name">${item.nom}</span>
-            </div>
-            <span class="cart-lenses cart-column">${item.lenses}</span>
-            <span class="cart-price cart-column">${item.prix},00 €</span>
-            <div class="cart-quantity cart-column">
-                <input type="button" value="-" cartId="${item.id}" cartLense="${item.lenses}" class="decrease">
-                <span class="cart-quantity-input">${item.quantité}</span>
-                <input type="button" value="+" cartId="${item.id}" cartLense="${item.lenses}" class="increase">
-                <button id="${item.id}" class="btn btn-danger btn-X" type="button">X</button>
-            </div>
-            </div>`; 
-    
-    
-      //let buyButton = document.getElementById("cart" + count);
-      //buyButton.onclick = e => {
-        //saveToCart(item);
-      //};
-    
-/*
-            document.getElementById('panier').innerHTML =
-          `<div class="cart-product">
-            <div class="cart-item cart-column">
-                <span class="cart-item-name">${item.nom}</span>
-            </div>
-            <span class="cart-lenses cart-column">${item.lenses}</span>
-            <span class="cart-price cart-column">${item.prix},00 €</span>
-            <div class="cart-quantity cart-column">
-                <input type="button" value="-" cartId="${item.id}" cartLense="${item.lenses}" class="decrease">
-                <span class="cart-quantity-input">${item.quantité}</span>
-                <input type="button" value="+" cartId="${item.id}" cartLense="${item.lenses}" class="increase">
-                <button id="${item.id}" class="btn btn-danger btn-X" type="button">X</button>
-            </div>
-            </div>`; 
-    
-
-    /*for (var key in cart) {
-      Object.values(cart)
-      
-      console.log(key + " -> " + cart[key]);
-    }*/
-
-    /*toto.forEach(obj => {
-        Object.entries(obj).forEach(([key, value]) => {
-            console.log(`${key} ${value}`);
-        });
-        console.log('-------------------');
-    });*/
+    } 
 
 
-    
-          
-
-/* // Supprimer un produit
-var removeProduct = localStorage.removeItem("orinoco" + productId, val)
-
-// Vider le panier
-var clearPanier = localStorage.clear()*/
 
 //HTML Formulaire
-document.getElementById("formulaire-validation").innerHTML = /*
-    <input type="text" name="prenom" placeholder="Prénom"><br>
-    <input type="text" name="nom" placeholder="Nom"><br>
-    <input type="email" name="email" placeholder="Email"><br>
-    <input type="text" name="adresse" placeholder="Adresse complète"><br>
-    <input type="text" name="ville" placeholder="Ville"><br>
-    <input type="number" name="code-postal" placeholder="Code postal"><br>
-    <input type="submit" name="validation" placeholder="Valider"><br>
-`;*/
+document.getElementById("formulaire-validation").innerHTML =
 
 `<div class="form-row">
     <div class="col-md-4 mb-3">
@@ -198,27 +86,29 @@ document.getElementById("formulaire-validation").innerHTML = /*
       <label for="validationDefault04">Ville*</label>
       <input type="text" class="form-control" id="validationDefault04" placeholder="Ville" required>
     </div>
-    <div class="col-md-3 mb-3">
-      <label for="validationDefault05">Code Postal*</label>
-      <input type="text" class="form-control" id="validationDefault05" placeholder="Code Postal" required>
-    </div>
   </div>
   <div class="cart_buttons"> 
     <button type="button" onclick=window.location.href='confirm.html'; class="button cart_button_clear" type="submit">Valider la commande</button>
   </div>`;
 
+  /*
+  //regex email
+  ^/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 
-/*
-//variable products
-let products = [];
-    panier.forEach(element => {
-    products.push(element.id)
-});
+  //regex prenom nom
+  /^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛäëïöüÿÄËÏÖÜŸçÇ \s]{1,}/
+
+  //regex adresse
+  /[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)*/
+
+  //regex ville
+//  /[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]{2,}/
+  
 
 
 
-//options de la requête API
-const options = {
+//requête POST
+const formulaire = {
     method: 'POST',
     body: JSON.stringify({
         contact: {
@@ -232,4 +122,5 @@ const options = {
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
-};*/
+};
+
