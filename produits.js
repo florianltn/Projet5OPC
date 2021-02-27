@@ -80,6 +80,7 @@ fetch(getUrl)
   var data = {	
     nom: item.name,
     photo: item.imageUrl,
+    lentille: item.lenses,
     description: item.description,
     id: item._id,
     quantité: qinput.value,
