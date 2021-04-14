@@ -3,7 +3,7 @@
     for(var i=1; i < localStorage.length + 1; i++){
       let panier = console.log(localStorage.getItem("orinoco" + i));
 
-      infoProduit = JSON.parse(localStorage.getItem("orinoco" +i));
+      infoProduit = JSON.parse(localStorage.getItem("orinoco" + i));
       console.log("Modèle :" + infoProduit.nom);
       console.log("Prix :" + infoProduit.prix);
 
@@ -44,7 +44,8 @@
         </div>
       </div>`;
       
-     // if (var i=1; i < localStorage.length + 1; i++ )
+      var totalPanier = 0
+      //for (var i=1; i < localStorage.length + 1; i++ )
       console.log(infoProduit.prix)
       document.getElementById('total').innerHTML = 
       `<div class="order_total">
@@ -61,6 +62,9 @@
 
 
 //HTML Formulaire
+
+
+
 document.getElementById("formulaire-validation").innerHTML =
 
 `<div class="form-row">
@@ -86,34 +90,85 @@ document.getElementById("formulaire-validation").innerHTML =
       <label for="validationDefault04">Ville*</label>
       <input type="text" pattern="(/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]{2,}/)" class="form-control" id="formVille" placeholder="Ville" required>
     </div>
-  </div>
-  <div class="cart_buttons"> 
-    <button type="button" onclick=window.location.href='confirm.html'; class="button cart_button_clear" type="submit">Valider la commande</button>
   </div>`;
 
-
-
-
-//requête POST
-let contact = {
-  firstName: document.getElementById("formNom").value,
-  lastName: document.getElementById("formPrenom").value,
-  address: document.getElementById("formEmail").value,
-  city: document.getElementById("formAdresse").value,
-  email: document.getElementById("formVille").value,
-}
-console.log(contact)
-
-let products = [infoProduit.id];
-console.log(products)
-
-const url = 'http://localhost:3000/api/cameras/order';
-
-const formulaire = {
-    method: 'POST',
-    headers: {
-        "Content-type": "application/json; charset=UTF-8"
+  function validationForm(){
+    let checkString = "/^[A-Z]{1}[a-z]/";
+    let checkMail = "/.+@.+\..+/";
+    let checkAdresse = "/^[^@&\"()!_$*€£`%+=\/;?#]+$/";
+  
+    if (checkString.test(document.getElementById("formNom").value) == false) {
+      alert("Votre nom doit commencer par une majuscule et continuer minuscules");
+      return false;
+    } 
+    if (checkString.test(document.getElementById("formPrenom").value) == false) {
+      alert("Votre prénom doit commencer par une majuscule et continuer avec des minuscules");
+      return false;
+    }  
+    if (checkMail.test(document.getElementById("formEmail").value) == false) {
+      alert("Votre email doit être au format abc@abc.abc");
+      return false;
+    } 
+    if (checkAdresse.test(document.getElementById("formAdresse").value) == false) {
+      alert(`Votre adresse contient un ou plusieurs des caractères interdits suivants : ` + '[^@&"()!_$*€£`%+=/;?#]' + "ou n'est pas renseignée.");
+      return false;
+    } 
+    if (checkString.test(document.getElementById("formVille").value) == false) {
+      alert("Le nom de votre ville doit commencer par une majuscule et continuer avec desminuscules");
+      return false;
+    } 
+    else {
+      return true;
     }
-    //body: contacts, products
+  }
+ 
+  
+//requête POST
+  function validation(){
+    let btnForm = document.getElementById("buttonSubmit");
     
-};
+    btnForm.addEventListener("click", function (event) {
+    let contact = {
+      firstName: document.getElementById("formNom").value,
+      lastName: document.getElementById("formPrenom").value,
+      address: document.getElementById("formAdresse").value,
+      city: document.getElementById("formVille").value,
+      email: document.getElementById("formEmail").value,
+    }
+    console.log(contact)
+
+    let products = [infoProduit.id];
+    console.log(products)
+
+    let url = 'http://localhost:3000/api/cameras/order';
+
+    let data = {contact, products}
+    let newData = JSON.stringify(data)
+
+    var request = new XMLHttpRequest();
+
+    request.onreadystatechange = function(){
+    if (this.readyState == XMLHttpRequest.DONE) {
+      if (this.status == 201){
+      console.log(this.readyState)
+      console.log(this.responseText);
+      // Récupération de la réponse du serveur
+      localStorage.setItem("orderResponse", this.responseText);
+      // Redirection vers la page de confirmation
+      
+      //window.location.href = "confirm.html"; 
+      } 
+    
+    else {
+      console.log("Administration : ERROR");
+        }
+      }
+    }
+  
+    request.open('POST', url)
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(newData);
+    
+
+  }
+    )}

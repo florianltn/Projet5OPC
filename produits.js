@@ -16,7 +16,7 @@ fetch(getUrl)
 
   let card =
       `<div class="card mb-3" style="max-width: 1024px;">
-        <div class="row">
+        <div class="row" id="productcontain">
           <div class="col-md-6">
             <img id="image" src="${item.imageUrl}" class="card-img" alt="${item.name}">
           </div>
