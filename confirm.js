@@ -1,4 +1,4 @@
-const orderCart = localStorage.getItem('commande');
+const orderCart = localStorage.getItem('orderResponse');
 const numCommande = JSON.parse(orderCart);
 console.log(numCommande.orderId);
 
@@ -9,14 +9,14 @@ const totalOrder = document.getElementById('totalorder');
 let order = document.getElementById('order');
 order.innerHTML = `<strong> ${numCommande.orderId}</strong>`;
 
-let total = 0;
+/*let total = 0;
 for (i = 0; i < totalPrice.length; i++) {
 
     total += totalPrice[i].price * totalPrice[i].quantity;
 }
-console.log(total);
+console.log(total);*/
 
-totalOrder.innerHTML += `<strong> ${total / 100},00 € </strong>`;
+/*totalOrder.innerHTML += `<strong> ${total / 100},00 € </strong>`;*/
 
 //vidage du Localstorage
 localStorage.clear();

@@ -9,7 +9,7 @@ fetch('http://localhost:3000/api/cameras/').then(response => {
 })
   .then(produit => {
     for(const item of produit) {
-        let prix = item.price / 100;
+        let prix = item.price / 10000;
         var urlProduit = 'produits.html'
         var pageProduit = urlProduit.concat(item._id)
         console.log(pageProduit)

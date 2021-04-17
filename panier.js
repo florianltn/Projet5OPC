@@ -1,5 +1,5 @@
   let infoProduit='';
-  
+
     for(var i=1; i < localStorage.length + 1; i++){
       let panier = console.log(localStorage.getItem("orinoco" + i));
 
@@ -32,7 +32,7 @@
                                      </div>
                                      <div class="cart_item_price cart_info_col">
                                          <div class="cart_item_title">Prix</div>
-                                         <div class="cart_item_text">${infoProduit.prix}</div>
+                                         <div class="cart_item_text">${infoProduit.prix}€</div>
                                      </div>
                                  </div>
                              </li>
@@ -43,85 +43,98 @@
          </div>
         </div>
       </div>`;
+    
       
-      var totalPanier = 0
-      //for (var i=1; i < localStorage.length + 1; i++ )
-      console.log(infoProduit.prix)
+/*var totalPanier = 0
+      for (i = 0; i < totalPanier.length; i++) {
+
+        totalPanier += infoProduit[i].prix * infoProduit[i].quantité;
+      }
+      console.log(totalPanier)*/
+      
+      let totalPaye = 0;
+      Object.keys(localStorage.getItem("orinoco" + [i])).forEach((infoProduit) => {
+        totalPaye += infoProduit.prix / 100;
+      });
+      
+      console.log(`Total à payer : ${totalPaye}€`);
+    
+      
       document.getElementById('total').innerHTML = 
       `<div class="order_total">
           <div class="order_total_content text-md-right">
             <div class="order_total_title">Prix total:</div>
-            <div class="order_total_amount">${(infoProduit.prix)  * (infoProduit.quantité)}</div>
+            <div class="order_total_amount">${totalPaye}€</div>
           </div>
       </div>
       <div class="cart_buttons"> 
         <button type="button" onclick=window.location.href='index.html'; class="button cart_button_clear">Continuer mes achats</button>
       </div>`;
-    } 
-
-
+    }
+  
 
 //HTML Formulaire
 
+function validationForm(){
+  let checkString = new RegExp ("/^[A-Z]{1}[a-z]/");
+  let checkMail = new RegExp ("/.+@.+\..+/");
+  let checkAdresse = new RegExp ("/^[^@&\"()!_$*€£`%+=\/;?#]+$/");
 
+  if (checkString.test(document.getElementById("formPrenom").value) == false) {
+    alert("Votre prénom doit commencer par une majuscule et continuer avec des minuscules");
+    return false;
+  }  
+  if (checkString.test(document.getElementById("formNom").value) == false) {
+    alert("Votre nom doit commencer par une majuscule et continuer avec des minuscules");
+    return false;
+  } 
+  if (checkMail.test(document.getElementById("formEmail").value) == false) {
+    alert("Votre email doit être au format abc@abc.abc");
+    return false;
+  } 
+  if (checkAdresse.test(document.getElementById("formAdresse").value) == false) {
+    alert(`Votre adresse contient un ou plusieurs des caractères interdits suivants : ` + '[^@&"()!_$*€£`%+=/;?#]' + "ou n'est pas renseignée.");
+    return false;
+  } 
+  if (checkString.test(document.getElementById("formVille").value) == false) {
+    alert("Le nom de votre ville doit commencer par une majuscule et continuer avec desminuscules");
+    return false;
+  } 
+  else {
+    return true;
+  }
+
+}
 
 document.getElementById("formulaire-validation").innerHTML =
 
 `<div class="form-row">
     <div class="col-md-4 mb-3">
       <label for="validationDefault01">Prénom*</label>
-      <input type="text" pattern="(/^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛäëïöüÿÄËÏÖÜŸçÇ \s]{1,}/)" class="form-control" id="formPrenom" placeholder="Prénom" required>
+      <input type="text" class="form-control" id="formPrenom" placeholder="Prénom" required>
     </div>
     <div class="col-md-4 mb-3">
       <label for="validationDefault02">Nom*</label>
-      <input type="text" pattern="(/^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛäëïöüÿÄËÏÖÜŸçÇ \s]{1,}/)" class="form-control" id="formNom" placeholder="Nom" required>
+      <input type="text" class="form-control" id="formNom" placeholder="Nom" required>
     </div>
     <div class="col-md-4 mb-3">
       <label for="validationDefaultUsername">Email*</label>
-      <input type="email" pattern="(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)" class="form-control" id="formEmail" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
+      <input type="email" class="form-control" id="formEmail" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
     </div>
   </div>
   <div class="form-row">
     <div class="col-md-6 mb-3">
       <label for="validationDefault03">Adresse complète*</label>
-      <input type="text" pattern="(/[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)*/)" class="form-control" id="formAdresse" placeholder="Adresse" required>
+      <input type="text" class="form-control" id="formAdresse" placeholder="Adresse" required>
     </div>
     <div class="col-md-3 mb-3">
       <label for="validationDefault04">Ville*</label>
-      <input type="text" pattern="(/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]{2,}/)" class="form-control" id="formVille" placeholder="Ville" required>
+      <input type="text" class="form-control" id="formVille" placeholder="Ville" required>
     </div>
-  </div>`;
+  </div>
+  `;
 
-  function validationForm(){
-    let checkString = "/^[A-Z]{1}[a-z]/";
-    let checkMail = "/.+@.+\..+/";
-    let checkAdresse = "/^[^@&\"()!_$*€£`%+=\/;?#]+$/";
-  
-    if (checkString.test(document.getElementById("formNom").value) == false) {
-      alert("Votre nom doit commencer par une majuscule et continuer minuscules");
-      return false;
-    } 
-    if (checkString.test(document.getElementById("formPrenom").value) == false) {
-      alert("Votre prénom doit commencer par une majuscule et continuer avec des minuscules");
-      return false;
-    }  
-    if (checkMail.test(document.getElementById("formEmail").value) == false) {
-      alert("Votre email doit être au format abc@abc.abc");
-      return false;
-    } 
-    if (checkAdresse.test(document.getElementById("formAdresse").value) == false) {
-      alert(`Votre adresse contient un ou plusieurs des caractères interdits suivants : ` + '[^@&"()!_$*€£`%+=/;?#]' + "ou n'est pas renseignée.");
-      return false;
-    } 
-    if (checkString.test(document.getElementById("formVille").value) == false) {
-      alert("Le nom de votre ville doit commencer par une majuscule et continuer avec desminuscules");
-      return false;
-    } 
-    else {
-      return true;
-    }
-  }
- 
+
   
 //requête POST
   function validation(){
@@ -156,7 +169,7 @@ document.getElementById("formulaire-validation").innerHTML =
       localStorage.setItem("orderResponse", this.responseText);
       // Redirection vers la page de confirmation
       
-      //window.location.href = "confirm.html"; 
+      window.location.href = "confirm.html"; 
       } 
     
     else {

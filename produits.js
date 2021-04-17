@@ -11,7 +11,7 @@ fetch(getUrl)
   .then(response => response.json())
   .then(item => {
   //console.log(item)
-  let prix = item.price / 100;
+  let prix = item.price / 10000;
   //console.log(prix)
 
   let card =
