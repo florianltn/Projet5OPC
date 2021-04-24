@@ -1,4 +1,5 @@
-  let infoProduit='';
+  let infoProduit = '';
+  var prixTotal = 0;
 
     for(var i=1; i < localStorage.length + 1; i++){
       let panier = console.log(localStorage.getItem("orinoco" + i));
@@ -7,11 +8,14 @@
       console.log("Modèle :" + infoProduit.nom);
       console.log("Prix :" + infoProduit.prix);
 
+      prixTotal = prixTotal + (infoProduit.prix * infoProduit.quantité);
+      console.log(prixTotal)
+
       document.getElementById('panier').innerHTML +=
       `<div class="cart_section">
         <div class="container-fluid">
          <div class="row">
-             <div class="col-lg-10 offset-lg-1">
+             <div class="col-lg-12 offset-lg-1">
                  <div class="cart_container">
                      <div class="cart_items">
                          <ul class="cart_list">
@@ -44,47 +48,43 @@
         </div>
       </div>`;
     
-      
-/*var totalPanier = 0
-      for (i = 0; i < totalPanier.length; i++) {
-
-        totalPanier += infoProduit[i].prix * infoProduit[i].quantité;
-      }
-      console.log(totalPanier)*/
-      
-      let totalPaye = 0;
-      Object.keys(localStorage.getItem("orinoco" + [i])).forEach((infoProduit) => {
-        totalPaye += infoProduit.prix / 100;
-      });
-      
-      console.log(`Total à payer : ${totalPaye}€`);
-    
-      
-      document.getElementById('total').innerHTML = 
-      `<div class="order_total">
-          <div class="order_total_content text-md-right">
-            <div class="order_total_title">Prix total:</div>
-            <div class="order_total_amount">${totalPaye}€</div>
-          </div>
+    document.getElementById('total').innerHTML = 
+      `
+      <div class="order_total">
+        <div class="order_total_content text-md-right">
+          <div class="order_total_title">Prix total:</div>
+          <div class="order_total_amount">${prixTotal}€</div>
+        </div>
       </div>
       <div class="cart_buttons"> 
         <button type="button" onclick=window.location.href='index.html'; class="button cart_button_clear">Continuer mes achats</button>
       </div>`;
-    }
   
+  
+    }
+   
+      
+      
+    
+
 
 //HTML Formulaire
 
 function validationForm(){
-  let checkString = new RegExp ("/^[A-Z]{1}[a-z]/");
+  /*let checkString = new RegExp ("/^[A-Z]{1}[a-z]/");
   let checkMail = new RegExp ("/.+@.+\..+/");
-  let checkAdresse = new RegExp ("/^[^@&\"()!_$*€£`%+=\/;?#]+$/");
+  let checkAdresse = new RegExp ("/^[^@&\"()!_$*€£`%+=\/;?#]+$/");*/
 
-  if (checkString.test(document.getElementById("formPrenom").value) == false) {
+  let checkName = new RegExp (/^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ \s]{1,}/);
+  let checkMail = new RegExp (/[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/);
+  let checkAdresse = new RegExp (/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ 0-9\s]{5,}/);
+  let checkCity = new RegExp(/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]{2,}/);
+
+  if (checkName.test(document.getElementById("formPrenom").value) == false) {
     alert("Votre prénom doit commencer par une majuscule et continuer avec des minuscules");
     return false;
   }  
-  if (checkString.test(document.getElementById("formNom").value) == false) {
+  if (checkName.test(document.getElementById("formNom").value) == false) {
     alert("Votre nom doit commencer par une majuscule et continuer avec des minuscules");
     return false;
   } 
@@ -93,11 +93,11 @@ function validationForm(){
     return false;
   } 
   if (checkAdresse.test(document.getElementById("formAdresse").value) == false) {
-    alert(`Votre adresse contient un ou plusieurs des caractères interdits suivants : ` + '[^@&"()!_$*€£`%+=/;?#]' + "ou n'est pas renseignée.");
+    alert("Votre adresse contient un ou plusieurs des caractères interdits ou n'est pas renseignée.");
     return false;
   } 
-  if (checkString.test(document.getElementById("formVille").value) == false) {
-    alert("Le nom de votre ville doit commencer par une majuscule et continuer avec desminuscules");
+  if (checkCity.test(document.getElementById("formVille").value) == false) {
+    alert("Le nom de votre ville doit commencer par une majuscule et continuer avec des minuscules");
     return false;
   } 
   else {
@@ -185,3 +185,5 @@ document.getElementById("formulaire-validation").innerHTML =
 
   }
     )}
+   
+  
