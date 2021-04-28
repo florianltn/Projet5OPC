@@ -1,6 +1,7 @@
   let infoProduit = '';
   var prixTotal = 0;
 
+
     for(var i=1; i < localStorage.length + 1; i++){
       let panier = console.log(localStorage.getItem("orinoco" + i));
 
@@ -9,44 +10,37 @@
       console.log("Prix :" + infoProduit.prix);
 
       prixTotal = prixTotal + (infoProduit.prix * infoProduit.quantité);
+      
+      
       console.log(prixTotal)
 
       document.getElementById('panier').innerHTML +=
-      `<div class="cart_section">
-        <div class="container-fluid">
-         <div class="row">
-             <div class="col-lg-12 offset-lg-1">
-                 <div class="cart_container">
-                     <div class="cart_items">
-                         <ul class="cart_list">
-                             <li class="cart_item clearfix">
-                                 <div class="cart_item_image"><img src="${infoProduit.photo}" alt="photo produit"></div>
-                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                     <div class="cart_item_name cart_info_col">
-                                         <div class="cart_item_title">Nom</div>
-                                         <div class="cart_item_text">${infoProduit.nom}</div>
-                                     </div>
-                                     <div class="cart_item_description cart_info_col">
-                                         <div class="cart_item_title">Description</div>
-                                         <div class="cart_item_text">${infoProduit.description}</div>
-                                     </div>
-                                     <div class="cart_item_quantity cart_info_col">
-                                         <div class="cart_item_title">Quantité</div>
-                                         <div class="cart_item_text">${infoProduit.quantité}</div>
-                                     </div>
-                                     <div class="cart_item_price cart_info_col">
-                                         <div class="cart_item_title">Prix</div>
-                                         <div class="cart_item_text">${infoProduit.prix}€</div>
-                                     </div>
-                                 </div>
-                             </li>
-                         </ul>
-                     </div>
-                 </div>
-             </div>
-         </div>
+      `<div class="container mb-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col">Produit</th>
+                            <th scope="col" class="text-center">Quantité</th>
+                            <th scope="col" class="text-right">Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="${infoProduit.photo}" class="photoproduit" alt="photo produit"</td>
+                            <td>${infoProduit.nom}</td>
+                            <td class="textquantité">${infoProduit.quantité}</td>
+                            <td class="text-right">${infoProduit.prix}€</td>                           
+                        </tr>
+                    </tbody> 
+                </table>      
+            </div>
+          </div>
         </div>
-      </div>`;
+       </div>`             
     
     document.getElementById('total').innerHTML = 
       `
@@ -57,13 +51,14 @@
         </div>
       </div>
       <div class="cart_buttons"> 
-        <button type="button" onclick=window.location.href='index.html'; class="button cart_button_clear">Continuer mes achats</button>
+        <button type="button" onclick=window.location.href='index.html'; id="continueCommand" class="button cart_button_clear">Continuer mes achats</button>
       </div>`;
   
-  
+     
     }
-   
-      
+    
+    //setItem pour récup sur confirm
+    localStorage.setItem("totalOrder", prixTotal); 
       
     
 
@@ -71,20 +66,21 @@
 //HTML Formulaire
 
 function validationForm(){
-  /*let checkString = new RegExp ("/^[A-Z]{1}[a-z]/");
-  let checkMail = new RegExp ("/.+@.+\..+/");
-  let checkAdresse = new RegExp ("/^[^@&\"()!_$*€£`%+=\/;?#]+$/");*/
-
+  let checkString = new RegExp /*(/^[A-Z]{1}[a-z]/)*/ (/^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ \s]{1,}/);
+  let checkMail = new RegExp /*(/.+@.+\..+/)*/ (/[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/);
+  let checkAdresse = new RegExp /*(/^[^@&\"()!_$*€£`%+=\/;?#]+$/)*/ (/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ 0-9\s]{5,}/);
+  let checkCity = new RegExp /*(/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]{2,}/)*/ (/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]{2,}/);
+/*
   let checkName = new RegExp (/^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ \s]{1,}/);
   let checkMail = new RegExp (/[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/);
-  let checkAdresse = new RegExp (/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ 0-9\s]{5,}/);
-  let checkCity = new RegExp(/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]{2,}/);
+  let checkAdresse = new RegExp (/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ 0-9\s]{5,}/);*/
+  
 
-  if (checkName.test(document.getElementById("formPrenom").value) == false) {
+  if (checkString.test(document.getElementById("formPrenom").value) == false) {
     alert("Votre prénom doit commencer par une majuscule et continuer avec des minuscules");
     return false;
   }  
-  if (checkName.test(document.getElementById("formNom").value) == false) {
+  if (checkString.test(document.getElementById("formNom").value) == false) {
     alert("Votre nom doit commencer par une majuscule et continuer avec des minuscules");
     return false;
   } 
@@ -93,7 +89,7 @@ function validationForm(){
     return false;
   } 
   if (checkAdresse.test(document.getElementById("formAdresse").value) == false) {
-    alert("Votre adresse contient un ou plusieurs des caractères interdits ou n'est pas renseignée.");
+    alert("Votre adresse contient un ou plusieurs des caractères interdits, est incomplète ou n'est pas renseignée.");
     return false;
   } 
   if (checkCity.test(document.getElementById("formVille").value) == false) {

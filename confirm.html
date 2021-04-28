@@ -35,10 +35,14 @@
 
         <!-- Message de remerciement + id de commande + coût total de la commande -->
         <section id="validation-commande">
-            <h2>Orinoco vous remercie pour votre commande !</h2>
+            <h2 class="titleConfirm">Orinoco vous remercie pour votre commande !</h2>
 
             <p>Votre commande est le numéro :<span id="order"></span></p>
-            <p>Le prix total de votre commande est de :<span id="totalorder"></span></p>
+            <p>Le prix total de votre commande est de :<span id="totalOrder"></span></p>
+            <div class="cart_buttons"> 
+                <!--<button class="button cart_button_clear" onclick="validationForm()" id="buttonSubmit" type="submit">Valider la commande</button> -->
+                <button class="button cart_button_clear" onclick=window.location.href='index.html';>Retour à l'accueil</button>
+            </div>
         </section>
 
     </main>
