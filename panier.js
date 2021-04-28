@@ -4,6 +4,7 @@
 
     for(var i=1; i < localStorage.length + 1; i++){
       let panier = console.log(localStorage.getItem("orinoco" + i));
+      console.log(localStorage.length)
 
       infoProduit = JSON.parse(localStorage.getItem("orinoco" + i));
       console.log("Modèle :" + infoProduit.nom);
@@ -57,8 +58,7 @@
      
     }
     
-    //setItem pour récup sur confirm
-    localStorage.setItem("totalOrder", prixTotal); 
+     
       
     
 
@@ -80,19 +80,19 @@ function validationForm(){
     alert("Votre prénom doit commencer par une majuscule et continuer avec des minuscules");
     return false;
   }  
-  if (checkString.test(document.getElementById("formNom").value) == false) {
+  else if (checkString.test(document.getElementById("formNom").value) == false) {
     alert("Votre nom doit commencer par une majuscule et continuer avec des minuscules");
     return false;
   } 
-  if (checkMail.test(document.getElementById("formEmail").value) == false) {
+  else if (checkMail.test(document.getElementById("formEmail").value) == false) {
     alert("Votre email doit être au format abc@abc.abc");
     return false;
   } 
-  if (checkAdresse.test(document.getElementById("formAdresse").value) == false) {
+  else if (checkAdresse.test(document.getElementById("formAdresse").value) == false) {
     alert("Votre adresse contient un ou plusieurs des caractères interdits, est incomplète ou n'est pas renseignée.");
     return false;
   } 
-  if (checkCity.test(document.getElementById("formVille").value) == false) {
+  else if (checkCity.test(document.getElementById("formVille").value) == false) {
     alert("Le nom de votre ville doit commencer par une majuscule et continuer avec des minuscules");
     return false;
   } 
@@ -166,6 +166,8 @@ document.getElementById("formulaire-validation").innerHTML =
       // Redirection vers la page de confirmation
       
       window.location.href = "confirm.html"; 
+      //setItem pour récup sur confirm
+      localStorage.setItem("totalOrder", prixTotal);
       } 
     
     else {
