@@ -1,5 +1,3 @@
-const main = document.getElementById('produits');
-
 fetch('http://localhost:3000/api/cameras/').then(response => {
     if(response.ok) {
         return response.json();

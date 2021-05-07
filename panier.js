@@ -4,16 +4,10 @@
 
     for(var i=1; i < localStorage.length + 1; i++){
       let panier = console.log(localStorage.getItem("orinoco" + i));
-      console.log(localStorage.length)
 
       infoProduit = JSON.parse(localStorage.getItem("orinoco" + i));
-      console.log("Modèle :" + infoProduit.nom);
-      console.log("Prix :" + infoProduit.prix);
 
       prixTotal = prixTotal + (infoProduit.prix * infoProduit.quantité);
-      
-      
-      console.log(prixTotal)
 
       document.getElementById('panier').innerHTML +=
       `<div class="container mb-4">
@@ -57,31 +51,21 @@
   
      
     }
-    
-     
-      
-    
-
 
 //HTML Formulaire
 
 function validationForm(){
-  let checkString = new RegExp /*(/^[A-Z]{1}[a-z]/)*/ (/^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ \s]{1,}/);
-  let checkMail = new RegExp /*(/.+@.+\..+/)*/ (/[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/);
-  let checkAdresse = new RegExp /*(/^[^@&\"()!_$*€£`%+=\/;?#]+$/)*/ (/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ 0-9\s]{5,}/);
-  let checkCity = new RegExp /*(/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]{2,}/)*/ (/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]{2,}/);
-/*
-  let checkName = new RegExp (/^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ \s]{1,}/);
+  let checkString = new RegExp (/^[A-Z][a-z]+$/);
   let checkMail = new RegExp (/[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/);
-  let checkAdresse = new RegExp (/[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ 0-9\s]{5,}/);*/
-  
+  let checkAdresse = new RegExp (/^[^@&\"()!_$*€£`%+=\/;?#]+$/);
+  let checkCity = new RegExp (/^[^@&\"()!_$*€£`%+=\/;?#0-9]+$/);  
 
   if (checkString.test(document.getElementById("formPrenom").value) == false) {
-    alert("Votre prénom doit commencer par une majuscule et continuer avec des minuscules");
+    alert("Votre prénom doit commencer par une majuscule et continuer avec des minuscules et ne doit pas comporter de chiffres ou caractères spéciaux");
     return false;
   }  
   else if (checkString.test(document.getElementById("formNom").value) == false) {
-    alert("Votre nom doit commencer par une majuscule et continuer avec des minuscules");
+    alert("Votre nom doit commencer par une majuscule et continuer avec des minuscules et ne doit pas comporter de chiffres ou caractères spéciaux");
     return false;
   } 
   else if (checkMail.test(document.getElementById("formEmail").value) == false) {
@@ -93,10 +77,11 @@ function validationForm(){
     return false;
   } 
   else if (checkCity.test(document.getElementById("formVille").value) == false) {
-    alert("Le nom de votre ville doit commencer par une majuscule et continuer avec des minuscules");
+    alert("Le nom de votre ville doit commencer par une majuscule et continuer avec des minuscules et ne doit pas comporter de chiffres ou caractères spéciaux");
     return false;
   } 
   else {
+    validation();
     return true;
   }
 
@@ -114,17 +99,17 @@ document.getElementById("formulaire-validation").innerHTML =
       <input type="text" class="form-control" id="formNom" placeholder="Nom" required>
     </div>
     <div class="col-md-4 mb-3">
-      <label for="validationDefaultUsername">Email*</label>
+      <label for="validationDefault03">Email*</label>
       <input type="email" class="form-control" id="formEmail" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
     </div>
   </div>
   <div class="form-row">
     <div class="col-md-6 mb-3">
-      <label for="validationDefault03">Adresse complète*</label>
+      <label for="validationDefault04">Adresse complète*</label>
       <input type="text" class="form-control" id="formAdresse" placeholder="Adresse" required>
     </div>
     <div class="col-md-3 mb-3">
-      <label for="validationDefault04">Ville*</label>
+      <label for="validationDefault05">Ville*</label>
       <input type="text" class="form-control" id="formVille" placeholder="Ville" required>
     </div>
   </div>
@@ -163,11 +148,10 @@ document.getElementById("formulaire-validation").innerHTML =
       console.log(this.responseText);
       // Récupération de la réponse du serveur
       localStorage.setItem("orderResponse", this.responseText);
-      // Redirection vers la page de confirmation
-      
-      window.location.href = "confirm.html"; 
       //setItem pour récup sur confirm
       localStorage.setItem("totalOrder", prixTotal);
+      // Redirection vers la page de confirmation
+      window.location.href = "confirm.html";
       } 
     
     else {
