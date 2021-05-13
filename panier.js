@@ -155,6 +155,7 @@ document.getElementById("formulaire-validation").innerHTML =
       } 
     
     else {
+      alert("La page n'est pas disponible actuellement, veuillez réessayer ultérieurement ou vérifiez bien vos informations")
       console.log("Administration : ERROR");
         }
       }

@@ -31,4 +31,8 @@ fetch('http://localhost:3000/api/cameras/').then(response => {
     }
 
       
-  }).catch(err => console.log(`Erreur message : ${err}`));
+  })
+    .catch(function (error){
+        console.log('Il y a eu un problème avec l\'opération fetch: ' + error);
+        alert('La connexion au serveur a échouée !');
+  });
